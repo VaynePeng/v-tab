@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
+const tailwindcss = require('tailwindcss')
 const srcDir = path.join(__dirname, '..', 'src')
 
 module.exports = {
@@ -27,6 +28,21 @@ module.exports = {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
+        exclude: /node_modules/
+      },
+      {
+        test:/\.css$/,
+        use:['style-loader','css-loader', {
+          loader: 'postcss-loader',
+          options: {
+            postcssOptions: {
+              plugins: [
+                tailwindcss('./tailwind.config.js'),
+                require('autoprefixer')
+              ]
+            }
+          }
+        }],
         exclude: /node_modules/
       }
     ]
