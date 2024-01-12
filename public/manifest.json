@@ -14,21 +14,17 @@
       "128": "icon.png"
     }
   },
+  "permissions": [
+    "activeTab"
+  ],
   "content_scripts": [
     {
       "matches": [
         "<all_urls>"
       ],
       "js": [
-        "js/vendor.js",
-        "js/content_script.js"
+        "js/vendor.js"
       ]
     }
-  ],
-  "background": {
-    "service_worker": "js/background.js"
-  },
-  "permissions": [
-    "storage"
   ]
 }
