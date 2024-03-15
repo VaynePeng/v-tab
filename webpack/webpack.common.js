@@ -2,7 +2,7 @@ const webpack = require('webpack')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const tailwindcss = require('tailwindcss')
-const srcDir = path.join(__dirname, '..', 'src')
+const srcDir = path.join(__dirname, '..', 'src/pages')
 
 module.exports = {
   entry: {
@@ -48,6 +48,9 @@ module.exports = {
     ]
   },
   resolve: {
+    alias: {
+      '@': path.join(__dirname, '..', 'src')
+    },
     extensions: ['.ts', '.tsx', '.js']
   },
   plugins: [
