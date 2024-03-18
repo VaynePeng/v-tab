@@ -26,7 +26,7 @@ const Update = (props: Props) => {
 
   return (
     <div
-      className="w-8 h-8 mr-2 flex justify-center items-center bg-white/30 shadow-sm font-bold hover:bg-white/50 hover:text-black/30 cursor-pointer"
+      className="w-8 h-8 mr-2 flex justify-center items-center bg-white/30 shadow-sm font-bold cursor-pointer rounded hover:shadow transition ease-in-out text-gray-500"
       onClick={handleUpload}
     >
       {Boolean(props.cover) ? (

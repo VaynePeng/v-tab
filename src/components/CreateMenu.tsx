@@ -69,13 +69,13 @@ const CreateMenu = (props: Props) => {
       <div className="flex">
         <Update onUpdate={updateImage} cover={menuItem.icon} />
         <input
-          className="flex-1 bg-white/30 shadow-sm p-2 h-8 outline-none"
+          className="flex-1 bg-white/30 shadow-sm p-2 h-8 outline-none rounded hover:shadow transition ease-in-out"
           value={menuItem.link}
           onInput={inputUrl}
           onKeyDown={submit}
         ></input>
       </div>
-      {urlError && <p className="text-red-500 text-xs mt-2">{errorMessage}</p>}
+      {urlError && <p className="text-red-400 text-xs mt-2">{errorMessage}</p>}
     </div>
   )
 }

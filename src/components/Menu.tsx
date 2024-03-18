@@ -38,7 +38,7 @@ const Menu = () => {
 
   return (
     <div className="fixed top-5 right-5">
-      <div className="bg-white/20 shadow-sm p-3 rounded-sm ">
+      <div className="bg-white/20 shadow-sm p-3 rounded-sm">
         <div className="grid grid-cols-4 gap-2">
           {menuList.map((item, index) => (
             <Item
