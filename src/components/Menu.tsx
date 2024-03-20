@@ -57,6 +57,12 @@ const Menu = () => {
     isDelete.current = true
   }
 
+  const menuDrag = (e: DragEvent<HTMLDivElement>): void => {
+    const currentTarget = e.currentTarget
+    const { clientX, clientY } = e
+    console.log('currentTarget', currentTarget)
+  }
+
   const menuDragStart = (e: DragEvent<HTMLDivElement>, id: number): void => {
     setIsDragging(true)
   }
@@ -88,6 +94,7 @@ const Menu = () => {
               icon={item.icon}
               link={item.link}
               onClick={navigateToLink}
+              onDrag={menuDrag}
               onDragStart={menuDragStart}
               onDragEnd={menuDragEnd}
             />
