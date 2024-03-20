@@ -10,6 +10,8 @@ export interface MenuItem {
 }
 
 const Menu = () => {
+  // 是否被拖拽中
+  const [isDragging, setIsDragging] = useState<boolean>(false)
   // 是否被拖拽到删除区域
   const isDelete = useRef<boolean>(false)
   const [menuList, setMenuList] = useState<Array<MenuItem>>([
@@ -55,7 +57,12 @@ const Menu = () => {
     isDelete.current = true
   }
 
+  const menuDragStart = (e: DragEvent<HTMLDivElement>, id: number): void => {
+    setIsDragging(true)
+  }
+
   const menuDragEnd = (e: DragEvent<HTMLDivElement>, id: number): void => {
+    setIsDragging(false)
     if (isDelete.current) {
       setMenuList((prev) => prev.filter((item) => item.id !== id))
     }
@@ -69,7 +76,9 @@ const Menu = () => {
     >
       <div className="bg-white/20 shadow-sm p-3 rounded-sm">
         <div
-          className="grid grid-cols-4 gap-2"
+          className={`grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/30 ${
+            isDragging ? 'border-dashed !border-red-300' : undefined
+          }`}
           onDragOver={(e) => e.preventDefault()}
         >
           {menuList.map((item, index) => (
@@ -79,6 +88,7 @@ const Menu = () => {
               icon={item.icon}
               link={item.link}
               onClick={navigateToLink}
+              onDragStart={menuDragStart}
               onDragEnd={menuDragEnd}
             />
           ))}
