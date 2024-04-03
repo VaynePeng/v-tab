@@ -11,7 +11,7 @@ const CreateMenu = (props: Props) => {
   const [urlError, setUrlError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>('')
   const [menuItem, setMenuItem] = useState<MenuItem>({
-    id: new Date().getTime(),
+    id: `${new Date().getTime()}`,
     icon: '',
     link: ''
   })
@@ -60,7 +60,7 @@ const CreateMenu = (props: Props) => {
     }
     props.onCreate?.(menuItem)
     setMenuItem({
-      id: new Date().getTime(),
+      id: `${new Date().getTime()}`,
       icon: '',
       link: ''
     })

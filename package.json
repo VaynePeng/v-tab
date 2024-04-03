@@ -16,6 +16,7 @@
     "url": "https://github.com/VaynePeng/v-tab.git"
   },
   "dependencies": {
+    "framer-motion": "^11.0.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
