@@ -1,13 +1,21 @@
-import React, { useState, DragEvent, useRef } from 'react'
-import { Reorder } from 'framer-motion'
+import React, { useState, useRef } from 'react'
+import { AnimatePresence, Reorder } from 'framer-motion'
 
 import Item from './Item'
-import CreateMenu from './CreateMenu'
+import ToDo from './ToDo'
 
 export interface MenuItem {
   id: string
   icon: string
   link: string
+}
+
+const AddMenu = () => {
+  return (
+    <div className="w-8 h-8 flex-none mr-2 flex justify-center items-center bg-white/30 shadow-sm font-bold cursor-pointer rounded hover:shadow transition ease-in-out text-gray-500">
+      +
+    </div>
+  )
 }
 
 const Menu = () => {
@@ -18,23 +26,18 @@ const Menu = () => {
   const [menuList, setMenuList] = useState<Array<MenuItem>>([
     {
       id: '1',
-      link: 'https://translate.google.com/',
-      icon: 'https://github.githubassets.com/assets/yolo-default-be0bbff04951.png'
+      link: 'https://mail.google.com/',
+      icon: './gmail.png'
     },
     {
       id: '2',
-      link: 'https://mail.google.com/',
-      icon: 'https://github.githubassets.com/assets/public-sponsor-default-9fa68986b057.png'
+      link: 'https://translate.google.com/',
+      icon: 'https://github.githubassets.com/assets/yolo-default-be0bbff04951.png'
     },
     {
       id: '3',
       link: 'https://github.com/',
       icon: 'https://github.githubassets.com/assets/pull-shark-default-498c279a747d.png'
-    },
-    {
-      id: '4',
-      link: 'https://www.linkedin.com/',
-      icon: 'https://github.githubassets.com/assets/arctic-code-vault-contributor-default-df8d74122a06.png'
     }
   ])
 
@@ -42,41 +45,28 @@ const Menu = () => {
     window.open(link, '_blank')
   }
 
-  const addMenu = (menuItem: MenuItem): void => {
-    setMenuList((prev) => [...prev, menuItem])
-  }
-
-  const enterContext = (e: DragEvent<HTMLDivElement>): void => {
-    if (!e.currentTarget.contains(e.relatedTarget as Node)) return
-    e.preventDefault()
-    isDelete.current = false
-  }
-
-  const leaveContext = (e: DragEvent<HTMLDivElement>): void => {
-    if (e.currentTarget.contains(e.relatedTarget as Node)) return
-    e.preventDefault()
-    isDelete.current = true
-  }
-
   return (
-    <div
-      className="fixed top-5 right-5"
-      onDragEnter={enterContext}
-      onDragLeave={leaveContext}
-    >
+    <div className="fixed top-5 right-5">
       <div className="bg-white/20 shadow-sm p-3 rounded-sm">
-        <Reorder.Group axis="x" onReorder={setMenuList} values={menuList}>
+        <Reorder.Group axis="x" values={menuList} onReorder={setMenuList}>
           <div
             className={`grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/30 ${
               isDragging ? 'border-dashed !border-red-300' : undefined
             }`}
           >
-            {menuList.map((item) => (
-              <Item key={item.id} item={item} />
-            ))}
+            <AnimatePresence>
+              {menuList.map((item) => (
+                <Item
+                  key={item.id}
+                  item={item}
+                  onDoubleClick={navigateToLink}
+                />
+              ))}
+              {menuList.length < 4 && <AddMenu />}
+            </AnimatePresence>
           </div>
         </Reorder.Group>
-        <CreateMenu onCreate={addMenu} />
+        <ToDo />
       </div>
     </div>
   )
