@@ -19,10 +19,7 @@ const AddMenu = () => {
 }
 
 const Menu = () => {
-  // 是否被拖拽中
-  const [isDragging, setIsDragging] = useState<boolean>(false)
-  // 是否被拖拽到删除区域
-  const isDelete = useRef<boolean>(false)
+  const timer = useRef<number | null>(null)
   const [menuList, setMenuList] = useState<Array<MenuItem>>([
     {
       id: '1',
@@ -42,7 +39,15 @@ const Menu = () => {
   ])
 
   const navigateToLink = (link: string): void => {
-    window.open(link, '_blank')
+    if (timer.current) clearTimeout(timer.current)
+    timer.current = setTimeout(() => {
+      open(link, '_blank')
+    }, 200)
+  }
+
+  const deleteItem = (id: string): void => {
+    timer.current && clearTimeout(timer.current)
+    setMenuList(menuList.filter((item) => item.id !== id))
   }
 
   return (
@@ -50,19 +55,39 @@ const Menu = () => {
       <div className="bg-white/20 shadow-sm p-3 rounded-sm">
         <Reorder.Group axis="x" values={menuList} onReorder={setMenuList}>
           <div
-            className={`grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/20 ${
-              isDragging ? 'border-dashed !border-red-300' : undefined
-            }`}
+            className={
+              'grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/20'
+            }
           >
             <AnimatePresence>
               {menuList.map((item) => (
-                <Item
+                <Reorder.Item
+                  drag
                   key={item.id}
-                  item={item}
-                  onDoubleClick={navigateToLink}
-                />
+                  value={item}
+                  id={item.id}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <Item
+                    item={item}
+                    onClick={navigateToLink}
+                    onDoubleClick={deleteItem}
+                  />
+                </Reorder.Item>
               ))}
-              {menuList.length < 4 && <AddMenu />}
+              {menuList.length < 4 && (
+                <Reorder.Item
+                  drag={false}
+                  value={null}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                >
+                  <AddMenu />
+                </Reorder.Item>
+              )}
             </AnimatePresence>
           </div>
         </Reorder.Group>
@@ -71,5 +96,4 @@ const Menu = () => {
     </div>
   )
 }
-
 export default Menu
