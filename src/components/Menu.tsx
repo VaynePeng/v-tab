@@ -39,9 +39,9 @@ const Menu = () => {
   ])
 
   const navigateToLink = (link: string): void => {
-    if (timer.current) clearTimeout(timer.current)
-    timer.current = setTimeout(() => {
-      open(link, '_blank')
+    if (timer.current) window.clearTimeout(timer.current)
+    timer.current = window.setTimeout(() => {
+      window.open(link, '_blank')
     }, 200)
   }
 
