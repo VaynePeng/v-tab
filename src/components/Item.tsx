@@ -20,7 +20,7 @@ const Item = (props: Props) => {
       exit={{ opacity: 0 }}
     >
       <div
-        className="rounded shadow-sm bg-white/30 w-8 h-8 p-1 cursor-pointer hover:shadow transition ease-in-out"
+        className="rounded shadow-sm bg-white/20 w-8 h-8 p-1 cursor-pointer hover:shadow transition ease-in-out"
         onDoubleClick={() => props.onDoubleClick?.(item.link)}
       >
         <img

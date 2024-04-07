@@ -71,7 +71,7 @@ const CreateMenu = (props: Props) => {
       <div className="flex">
         <Update onUpdate={updateImage} cover={menuItem.icon} />
         <input
-          className="flex-1 w-28 bg-white/30 shadow-sm p-2 h-8 outline-none rounded hover:shadow transition ease-in-out"
+          className="flex-1 w-28 bg-white/20 shadow-sm p-2 h-8 outline-none rounded hover:shadow transition ease-in-out"
           value={menuItem.link}
           onInput={inputUrl}
           onKeyDown={submit}

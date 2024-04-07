@@ -12,7 +12,7 @@ export interface MenuItem {
 
 const AddMenu = () => {
   return (
-    <div className="w-8 h-8 flex-none mr-2 flex justify-center items-center bg-white/30 shadow-sm font-bold cursor-pointer rounded hover:shadow transition ease-in-out text-gray-500">
+    <div className="w-8 h-8 flex-none mr-2 flex justify-center items-center bg-white/20 shadow-sm font-bold cursor-pointer rounded hover:shadow transition ease-in-out text-gray-500">
       +
     </div>
   )
@@ -50,7 +50,7 @@ const Menu = () => {
       <div className="bg-white/20 shadow-sm p-3 rounded-sm">
         <Reorder.Group axis="x" values={menuList} onReorder={setMenuList}>
           <div
-            className={`grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/30 ${
+            className={`grid grid-cols-[repeat(4,2rem)] gap-2 p-2 rounded shadow-sm border border-transparent bg-white/20 ${
               isDragging ? 'border-dashed !border-red-300' : undefined
             }`}
           >
