@@ -67,6 +67,7 @@ const Todo = () => {
         })}
         <Reorder.Item
           value={null}
+          drag={false}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
