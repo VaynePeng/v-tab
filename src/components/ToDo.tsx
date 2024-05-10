@@ -57,7 +57,7 @@ const Todo = () => {
               exit={{ opacity: 0 }}
             >
               <div
-                className="rounded shadow-sm w-[170px] bg-white/20 mt-2 p-2 cursor-pointer hover:shadow transition ease-in-out"
+                className="w-[170px] px-2 py-2.5 cursor-pointer  transition ease-in-out border-b border-dashed"
                 onDoubleClick={() => removeItem(item.id)}
               >
                 {item.content}
@@ -73,7 +73,7 @@ const Todo = () => {
           exit={{ opacity: 0 }}
         >
           <input
-            className="w-full rounded shadow-sm bg-white/20 mt-2 p-2 cursor-pointer hover:shadow transition ease-in-out outline-none"
+            className="w-[170px] bg-transparent mt-2.5 cursor-pointer transition ease-in-out outline-none"
             placeholder="来点灵感！"
             onKeyUp={handleKeyUp}
           />
