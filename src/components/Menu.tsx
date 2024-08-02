@@ -12,7 +12,7 @@ const Menu = () => {
   return (
     <div className="fixed top-5 right-5">
       <div className="bg-white/20 shadow-sm p-3 rounded-sm">
-        <div className='px-2 font-bold'>Note</div>
+        <div className='font-bold'>笔记</div>
         <ToDo />
       </div>
     </div>

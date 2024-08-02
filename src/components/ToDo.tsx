@@ -1,5 +1,6 @@
 import React, { memo, useState } from 'react'
 import { AnimatePresence, Reorder } from 'framer-motion'
+import { toast } from 'react-toastify'
 
 export interface TodoItem {
   id: string
@@ -10,15 +11,15 @@ const Todo = () => {
   const [todoList, setTodoList] = useState<Array<TodoItem>>([
     {
       id: '1',
-      content: '吃饭'
+      content: '鱼鱼在哪里 ❓'
     },
     {
       id: '2',
-      content: '睡觉'
+      content: '我要开始摸鱼了 🐟'
     },
     {
       id: '3',
-      content: '打豆豆'
+      content: '哎呀，鱼鱼真好摸 🥰'
     }
   ])
 
@@ -30,6 +31,11 @@ const Todo = () => {
     if (e.key === 'Enter') {
       const target = e.target as HTMLInputElement
       const value = target.value.trim()
+      if (!value) return
+      if (todoList.length >= 10) {
+        toast('小笨蛋可记不住这么多事情 (・｀ヘ´・;)ゞ')
+        return
+      }
       if (!value) return
       setTodoList([
         ...todoList,
@@ -57,7 +63,7 @@ const Todo = () => {
               exit={{ opacity: 0 }}
             >
               <div
-                className="w-[170px] px-2 py-2.5 cursor-pointer  transition ease-in-out border-b border-dashed"
+                className="w-[170px] py-2.5 cursor-pointer  transition ease-in-out border-b border-dashed"
                 onDoubleClick={() => removeItem(item.id)}
               >
                 {item.content}
